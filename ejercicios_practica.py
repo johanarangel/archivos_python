@@ -8,12 +8,14 @@ Version: 1.2
 
 Descripcion:
 Programa creado para que practiquen los conocimietos
-adquiridos durante la semana
+adquiridos durante la semana 
 '''
 
 __author__ = "Inove Coding School"
 __email__ = "alumnos@inove.com.ar"
 __version__ = "1.2"
+
+import csv
 
 
 def ej1():
@@ -21,13 +23,27 @@ def ej1():
     cantidad_letras = 0
 
     '''
-    Realizar un prorgrama que cuenta la cantidad de caracteres
+    Realizar un programa que cuenta la cantidad de caracteres
     (todo tipo de caracter, los espacios cuentan) de un archivo.
-    Abra el archivo "text.txt" en modo "lectura", lea linea a
+    Abra el archivo "texto.txt" en modo "lectura", lea linea a
     linea el archivo, y cuente la cantidad de caracteres de cada línea.
     Debe realizar la sumatoria total de la cantidad de caracteres de todas
     las líneas para obtener el total del archivo e imprimirlo en pantalla
     '''
+    fi = open('texto.txt', 'r')
+    sumatoria_total = 0
+
+    while True:
+        line = fi.readline()
+        caracteres_linea = len(line)
+        sumatoria_total += caracteres_linea
+                
+        if not line:
+            break
+    
+    print('La sumatoria total de caracteres del archivo "texto.txt" es:', sumatoria_total)
+        
+    fi.close()
 
 
 def ej2():
@@ -43,12 +59,31 @@ def ej2():
     nada (texto vacio). En ese momento se termina el bucle
     y se cierra el archivo.
     Durante la realización del bucle y el ingreso de texto por
-    consola, se debe ir contanto cuandos caracteres se ingresaron
+    consola, se debe ir contando cuantos caracteres se ingresaron
     por consola, al fin de al terminar el bucle saber cuantos
     caracteres se copiaron al archivo.
     NOTA: Recuerde agregar el salto de línea "\n" a cada entrada
     de texto de la consola antes de copiar la archivo.
     '''
+    fo = open('escritura.txt', 'w') 
+    caracteres_archivo = 0
+
+    while True:
+        texto = str(input('Ingrese texto \n'))
+        fo.write(texto)
+        fo.write('\n')
+        caracteres_linea = len(texto)
+        caracteres_archivo += caracteres_linea
+                        
+        if len(texto) == 0:
+            print('Ha salido del programa')
+            break
+    
+    print('Se copiaron {} caracteres al archivo'.format(caracteres_archivo))
+    
+    
+    fo.flush()
+    fo.close()
 
 
 def ej3():
@@ -56,7 +91,7 @@ def ej3():
     cantidad_ambientes = 2
 
     '''
-    Realizar un prorgrama que solicite la cantidad de
+    Realizar un programa que solicite la cantidad de
     ambientes de los alquileres que se desean analizar.
     Abra el archivo "propiedades.csv" y mediante un bucle analizar:
     1) Contar cuantos alquileres en "pesos" hay disponibles
@@ -68,6 +103,36 @@ def ej3():
     4) Obtener el mínimo valor de alquiler en "pesos"
     de la cantidad de ambientes deseados.
     '''
+    alquiler_ars = 0  
+    consulta_ambientes = int(input('Ingrese la cantidad de ambientes:\n'))
+    archivo = open('propiedades.csv')
+    data = list(csv.DictReader(archivo))
+    cantidad_filas = len(data)
+    sumatoria = 0
+    lista_precio = []
+                
+    for i in range(cantidad_filas):
+        row = data[i]
+        ambientes = row.get('ambientes')
+        monedas = row.get('moneda')
+        precio = float(row.get('precio'))
+                                               
+        if (ambientes == str(consulta_ambientes) and monedas == 'ARS'):
+            sumatoria += precio
+            lista_precio.append(precio)
+            alquiler_ars += 1
+            
+    try:
+        promedio = sumatoria / alquiler_ars 
+    except:
+        print('No se puede dividir por cero')
+                                      
+    print('Los alquileres en "pesos" disponibles por {} ambientes son {}'.format(consulta_ambientes, alquiler_ars))
+    print('El promedio de los alquileres en "pesos" de {} ambientes es {}'.format(consulta_ambientes, round(promedio, 2)))
+    print('El máximo valor de alquiler en "pesos" es {} por {} ambientes'.format(max(lista_precio), consulta_ambientes))
+    print('El mínimo valor de alquiler en "pesos" es {} por {} ambientes'.format(min(lista_precio), consulta_ambientes))
+
+    archivo.close()
 
 
 def ejercicio_extra():
@@ -150,7 +215,7 @@ def ejercicio_extra():
     de Python que resuelva este problema.
 
     '''
-
+     
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
