@@ -16,6 +16,7 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.2"
 
 import csv
+import re
 
 
 def ej1():
@@ -215,6 +216,323 @@ def ejercicio_extra():
     de Python que resuelva este problema.
 
     '''
+           
+    
+    archivo = '2019 Ironman World Championship Results.csv'
+    #-----------categoria MPRO---------
+    time_swim = []
+    time_bike = []
+    time_run = []
+
+    #-----------categoria M45-49---------
+    tiempo_swim = []
+    tiempo_bike = []
+    tiempo_run = []
+
+    #-----------categoria M25-29---------
+    tiempo_swim_m2529 = []
+    tiempo_bike_m2529 = []
+    tiempo_run_m2529 = []
+
+    #-----------categoria M18-24---------
+    tiempo_swim_m1824 = []
+    tiempo_bike_m1824 = []
+    tiempo_run_m1824 = []
+
+    with open(archivo) as csvfile:
+        data = list(csv.DictReader(csvfile))
+        cantidad_filas = len(data)
+    
+    #-------------------- categoria MPRO, Swim--------------------------
+        for i in range(cantidad_filas):
+            row = data[i]
+            categoria = row.get('Division')
+            swim = row.get('Swim')
+            bike = row.get('Bike')
+            run = row.get('Run')
+
+            if  categoria== 'MPRO':
+                time= swim.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                time_swim.append(total_segundos)
+                promedio_swim = sum(time_swim) / len(time_swim)
+
+    #-------------------- categoria MPRO, Bike--------------------------
+        
+                time= bike.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                time_bike.append(total_segundos)
+                promedio_bike = sum(time_bike) / len(time_bike)
+
+    #-------------------- categoria MPRO, Run--------------------------
+        
+                time= run.split(sep=':')
+                    
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                    
+                except ValueError:
+                    pass
+
+                time_run.append(total_segundos)
+                promedio_run = sum(time_run) / len(time_run)
+
+               
+        #-------------------- categoria M45-49, Swim--------------------------
+        #---------------------------------------------------------------------
+        
+            elif  categoria== 'M45-49':
+                time= swim.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_swim.append(total_segundos)
+                promedio_swim_m4549 = sum(tiempo_swim) / len(tiempo_swim)
+
+    #-------------------- categoria M45-49, Bike--------------------------
+        
+                time= bike.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_bike.append(total_segundos)
+                promedio_bike_m4549 = sum(tiempo_bike) / len(tiempo_bike)
+
+    #-------------------- categoria M45-49, Run--------------------------
+        
+                time= run.split(sep=':')
+                    
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                    
+                except ValueError:
+                    pass
+
+                tiempo_run.append(total_segundos)
+                promedio_run_m4549 = sum(tiempo_run) / len(tiempo_run)
+
+        #-------------------- categoria M25-29, Swim--------------------------
+        #---------------------------------------------------------------------
+        
+            elif  categoria== 'M25-29':
+                time= swim.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_swim_m2529.append(total_segundos)
+                promedio_swim_m2529 = sum(tiempo_swim_m2529) / len(tiempo_swim_m2529)
+
+    #-------------------- categoria  M25-29, Bike--------------------------
+        
+                time= bike.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_bike_m2529.append(total_segundos)
+                promedio_bike_m2529 = sum(tiempo_bike_m2529) / len(tiempo_bike_m2529)
+
+    #-------------------- categoria  M25-29, Run--------------------------
+        
+                time= run.split(sep=':')
+                    
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                    
+                except ValueError:
+                    pass
+
+                tiempo_run_m2529.append(total_segundos)
+                promedio_run_m2529 = sum(tiempo_run_m2529) / len(tiempo_run_m2529)
+
+        #-------------------- categoria M18-24, Swim--------------------------
+        #---------------------------------------------------------------------
+        
+            elif  categoria== 'M18-24':
+                time= swim.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_swim_m1824.append(total_segundos)
+                promedio_swim_m1824 = sum(tiempo_swim_m1824) / len(tiempo_swim_m1824)
+
+    #-------------------- categoria M18-24, Bike--------------------------
+        
+                time= bike.split(sep=':')
+                
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                
+                except ValueError:
+                    pass
+
+                tiempo_bike.append(total_segundos)
+                try:
+                    promedio_bike_m1824 = sum(tiempo_bike_m1824) / len(tiempo_bike_m1824)
+                
+                except ZeroDivisionError:
+                    pass
+                
+    #-------------------- categoria M18-24, Run--------------------------
+        
+                time= run.split(sep=':')
+                    
+                try:
+                    horas = int(time[0])
+                    minutos = int(time[1])
+                    segundos = int(time[2])
+                    total_segundos = horas * 3600 + minutos * 60 + segundos
+                    
+                except ValueError:
+                    pass
+
+                tiempo_run_m1824.append(total_segundos)
+                promedio_run_m1824 = sum(tiempo_run_m1824) / len(tiempo_run_m1824)
+
+        #-------------------- Resultados categoria MPRO, swim--------------------------
+        try: 
+            print('El tiempo máximo realizado en la categoria: MPRO, en Swim es', max(time_swim), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: MPRO, en Swim es', min(time_swim), 'seg')
+            print('El tiempo promedio en la categoria: MPRO, en Swim es', round(promedio_swim, 2), 'seg')
+        
+        #-------------------- Resultados categoria MPRO, bike--------------------------
+         
+            print('El tiempo máximo realizado en la categoria: MPRO, en Bike es', max(time_bike), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: MPRO, en Bike es', min(time_bike), 'seg')
+            print('El tiempo promedio en la categoria: MPRO, en Bike es', round(promedio_bike, 2), 'seg')
+        
+        #-------------------- Resultados categoria MPRO, run--------------------------
+
+            print('El tiempo máximo realizado en la categoria: MPRO, en Run es', max(time_run), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: MPRO, en Run es', min(time_run), 'seg')
+            print('El tiempo promedio en la categoria: MPRO, en Run es', round(promedio_run, 2), 'seg')
+
+        #-------------------- Resultados categoria M45-49, swim--------------------------
+        #--------------------------------------------------------------------------------
+        
+            print('El tiempo máximo realizado en la categoria:M45-49, en Swim es', max(tiempo_swim), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M45-49, en Swim es', min(tiempo_swim), 'seg')
+            print('El tiempo promedio en la categoria: M45-49, en Swim es', round(promedio_swim_m4549, 2), 'seg')
+        
+        #-------------------- Resultados categoria M45-49, bike--------------------------
+         
+            print('El tiempo máximo realizado en la categoria: M45-49, en Bike es', max(tiempo_bike), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M45-49, en Bike es', min(tiempo_bike), 'seg')
+            print('El tiempo promedio en la categoria: M45-49, en Bike es', round(promedio_bike_m4549, 2), 'seg')
+        
+        #-------------------- Resultados categoria M45-49, run--------------------------
+
+            print('El tiempo máximo realizado en la categoria: M45-49, en Run es', max(tiempo_run), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M45-49, en Run es', min(tiempo_run), 'seg')
+            print('El tiempo promedio en la categoria: M45-49, en Run es', round(promedio_run_m4549, 2), 'seg')
+
+        #-------------------- Resultados categoria M25-29, swim--------------------------
+        #--------------------------------------------------------------------------------
+        
+            print('El tiempo máximo realizado en la categoria:M25-29, en Swim es', max(tiempo_swim_m2529), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M25-29, en Swim es', min(tiempo_swim_m2529), 'seg')
+            print('El tiempo promedio en la categoria: M25-29, en Swim es', round(promedio_swim_m2529, 2), 'seg')
+        
+        #-------------------- Resultados categoria M25-29, bike--------------------------
+         
+            print('El tiempo máximo realizado en la categoria: M25-29, en Bike es', max(tiempo_bike_m2529), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M25-29, en Bike es', min(tiempo_bike_m2529), 'seg')
+            print('El tiempo promedio en la categoria: M25-29, en Bike es', round(promedio_bike_m2529, 2), 'seg')
+        
+        #-------------------- Resultados categoria M25-29, run--------------------------
+
+            print('El tiempo máximo realizado en la categoria: M25-29, en Run es', max(tiempo_run_m2529), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M25-29, en Run es', min(tiempo_run_m2529), 'seg')
+            print('El tiempo promedio en la categoria: M25-29, en Run es', round(promedio_run_m2529, 2), 'seg')
+        
+        #-------------------- Resultados categoria M18-24, swim--------------------------
+        #--------------------------------------------------------------------------------
+        
+            print('El tiempo máximo realizado en la categoria: M18-24, en Swim es', max(tiempo_swim_m1824), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M18-24, en Swim es', min(tiempo_swim_m1824), 'seg')
+            print('El tiempo promedio en la categoria: M18-24, en Swim es', round(promedio_swim_m1824, 2), 'seg')
+        
+        #-------------------- Resultados categoria M18-24, bike--------------------------
+         
+            print('El tiempo máximo realizado en la categoria: M18-24, en Bike es', max(tiempo_bike_m1824), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M18-24, en Bike es', min(tiempo_bike_m1824), 'seg')
+            print('El tiempo promedio en la categoria: M18-24, en Bike es', round(promedio_bike_m1824, 2), 'seg')
+        
+        #-------------------- Resultados categoria M18-24 , run--------------------------
+
+            print('El tiempo máximo realizado en la categoria: M18-24, en Run es', max(tiempo_run_m1824), 'seg') 
+            print('El tiempo mínimo realizado en la categoria: M18-24, en Run es', min(tiempo_run_m1824), 'seg')
+            print('El tiempo promedio en la categoria: M18-24, en Run es', round(promedio_run_m1824, 2), 'seg')
+        except ValueError:
+            pass
+                
+        
+
+    csvfile.close()
      
 
 if __name__ == '__main__':
@@ -222,4 +540,4 @@ if __name__ == '__main__':
     #ej1()
     #ej2()
     #ej3()
-    #ejercicio_extra()
+    ejercicio_extra()
